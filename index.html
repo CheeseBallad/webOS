@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script type="module" src="./script.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+  <body style = "background-color: #966bdb; background-image: url(./wallpaper4.jpg); background-size: cover;
+  height: 100vh;">
+
+<!--THE WINDOW-->
+    <div class="window" id = "welcome">
+
+<!--DRAG AREA-->
+    <div id="header" style = "width: 100%; object-fit: cover; display: flex; align-items: center;
+     cursor: grab; justify-content: space-between; margin-top: 8px;
+      background-color: #4b3857; border-radius: 16px; border: solid 1px rgba(0, 0, 0, 0.25);"> 
+
+<!--CLOSE BUTTON-->
+     <div class="closebutton" id="welcomeclose"></div>
+
+    </div>
+
+  <h1 style = "padding: 10px; margin-left: 10px;">  Whats up</h1>
+  <h2><s>hello</s> ay <dfn><strong>yoo</strong></dfn> </h2>
+  <img style="width: 200px; height: 200px; border-radius: 50px; object-fit: cover" src="./Raining.jpg" />
+  <p>what</p>
+ <!-- <a href="https://example.com/">label</a> --> <!--for URL-->
+
+    </div>
+
+
+    <div style= "position: absolute; width: 100%; height: 60px; display: flex; 
+    backdrop-filter: blur(10px); background-color: rgba(0, 0, 0, 0.25); color: #fff; 
+    justify-content: space-between; align-items: flex-end;">
+
+  <p id="welcomeopen" style= "cursor: pointer; margin-left: 16px; font-weight: 700; 
+  background-color: rgba(87, 72, 84, 0.125); padding: 8px 12px; border-radius: 10px;">
+    TuyuOS
+  </p>
+
+  <p id="timeElement"
+  style = "margin-right: 16px; font-weight: 700; 
+  background-color: rgba(87, 72, 84, 0.125); padding: 8px 12px; border-radius: 10px;">
+    Time
+</p>
+
+    </div>
+
+      <script>
+        function updatetime(){
+          var currentTime = new Date().toLocaleString();
+          var timeText = document.querySelector("#timeElement");
+          timeText.innerHTML = currentTime;
+    }
+    setInterval(updatetime, 1000);
+
+      </script>
+
+<script src="script.js"></script>
+
+
+  </body>
+
+</html>
