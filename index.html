@@ -5,11 +5,11 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-  <body style = "background-color: #966bdb; background-image: url(./wallpaper4.jpg); background-size: cover;
-  height: 100vh;">
+  <body style = "background-color: #966bdb; background-image: url(./wallpaper2.jpg); background-size: cover;
+  height: 100vh; background-repeat: no-repeat; margin: 0px;">
 
-<!--THE WINDOW-->
-    <div class="window" id = "welcome">
+<!--THE WELCOME WINDOW-->
+    <div class="window" id = "welcome" style = "top: calc(50% - 90px); left: calc(50% - 180px); text-align: center; justify-content: center;">
 
 <!--DRAG AREA-->
     <div id="header" style = "width: 100%; object-fit: cover; display: flex; align-items: center;
@@ -23,16 +23,14 @@
 
   <h1 style = "padding: 10px; margin-left: 10px;">  Whats up</h1>
   <h2><s>hello</s> ay <dfn><strong>yoo</strong></dfn> </h2>
-  <img style="width: 200px; height: 200px; border-radius: 50px; object-fit: cover" src="./Raining.jpg" />
+  <img style="width: 200px; height: 200px; border-radius: 50px; object-fit: cover" src="./umbrella.jpg" />
   <p>what</p>
  <!-- <a href="https://example.com/">label</a> --> <!--for URL-->
 
     </div>
 
-
-    <div style= "position: absolute; width: 100%; height: 60px; display: flex; 
-    backdrop-filter: blur(10px); background-color: rgba(0, 0, 0, 0.25); color: #fff; 
-    justify-content: space-between; align-items: flex-end;">
+<!--THE TOP BAR-->
+    <div class= "bar">
 
   <p id="welcomeopen" style= "cursor: pointer; margin-left: 16px; font-weight: 700; 
   background-color: rgba(87, 72, 84, 0.125); padding: 8px 12px; border-radius: 10px;">
@@ -46,6 +44,17 @@
 </p>
 
     </div>
+
+    <!--THE APPS-->
+    <div id="desktopApps" style="padding-top: 64px; padding-left: 16px;">
+
+    <div class= "selected" style="text-align: center; padding: 16px; filter: drop-shadow(0 0 2px rgb(20, 20, 20)); width: fit-content">
+      <img src="./Raining.jpg" style="width: 64px; height: 64px; border-radius: 16px;">
+      <p style="margin: 0px; color: #ffffff; ">TUYU</p>
+    </div>
+
+    </div>
+
 
       <script>
         function updatetime(){

@@ -1,3 +1,4 @@
+//windows logic
 dragElement(document.getElementById("welcome")); 
 function dragElement(element) {
 
@@ -46,7 +47,7 @@ function dragElement(element) {
   }
 }
 
-
+//welcome screen
 var welcomeScreen = document.querySelector("#welcome")
 function closeWindow(element) {
   element.style.display = "none"
@@ -65,3 +66,6 @@ welcomeScreenClose.addEventListener("click", function() {
 welcomeScreenOpen.addEventListener("click", function() {
   openWindow(welcomeScreen);
 });
+
+//App clicking
+var selectedIcon = undefined
