@@ -21,3 +21,6 @@ I wanted to dive into HTML, CSS, and JavaScript by building something practical,
 - Music player (probably TUYU)
 - Better animations and UI
 - More TUYU!
+
+## Credits
+- Some UI elements and aesthetics were inspired by designs I dug through online. I adapted them to fit the primary style (TUYU) of this project.

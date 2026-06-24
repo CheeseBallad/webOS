@@ -5,32 +5,30 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-  <body style = "background-color: #966bdb; background-image: url(./wallpaper6.png); background-size: cover;
-  height: 100vh; background-repeat: no-repeat; margin: 0px;">
+  <body class = "body" style = "background-image: url(./wallpaper6.png);">
 
 <!--THE WELCOME WINDOW-->
-    <div class="window" id = "welcome" style = "top: calc(50% - 90px); left: calc(50% - 180px); text-align: center; justify-content: center;">
+    <div class="window" id = "welcome" style = "top: calc(50% - 90px); left: calc(50% - 180px);
+     text-align: center; flex-direction: column;
+  align-items: center;">
 
 <!--DRAG AREA-->
-    <div id="header" style = "width: 100%; object-fit: cover; display: flex; align-items: center;
-     cursor: grab; justify-content: space-between; margin-top: 8px;
-      background-color: #4b3857; border-radius: 16px; border: solid 1px rgba(0, 0, 0, 0.25);"> 
+    <div class= "drag" id="header"> 
 
 <!--CLOSE BUTTON-->
-     <div class="closebutton" id="welcomeclose"></div>
-
+     <div class="closebutton" id="welcomeclose"> </div>
     </div>
 
   <h1 style = "padding: 10px; margin-left: 10px;">  Whats up</h1>
   <h2><s>hello</s> ay <dfn><strong>yoo</strong></dfn> </h2>
   <img style="width: 200px; height: 200px; border-radius: 50px; object-fit: cover" src="./umbrella.jpg" />
   <p>what</p>
- <!-- <a href="https://example.com/">label</a> --> <!--for URL-->
+ <!-- <a href="https://example.com/">label</a> --> <!--for URL js in case-->
 
     </div>
 
 <!--THE TOP BAR-->
-    <div style = "justify-content: center;">
+    <div id = "topbarcontainer">
     <div class= "bar">
 
   <p id="welcomeopen" style= "cursor: pointer; margin-left: 16px; font-weight: 700; 
@@ -64,7 +62,9 @@
 
     </div>
 
-    <div class= "TUYUdow" id = "TUYU" style = "top: calc(50% - 90px); left: calc(50% - 180px);"> </div>
+    <div class= "TUYUdow" id = "TUYU" style = "top: calc(50% - 90px); left: calc(50% - 180px);">
+    <div id = "header" class= "drag2"></div>
+    </div>
     <!---->
     </div>
 
