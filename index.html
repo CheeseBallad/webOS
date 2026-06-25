@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-  <body class = "body" style = "background-image: url(./wallpaper6.png);">
+  <body id= "desktop" class = "body" style = "background-image: url(./wallpaper6.png);">
 
 <!--THE WELCOME WINDOW-->
     <div class="window" id = "welcome" style = "top: calc(50% - 90px); left: calc(50% - 180px);
@@ -29,7 +29,7 @@
 
 <!--THE TOP BAR-->
     <div id = "topbarcontainer">
-    <div class= "bar">
+    <div id = "top" class= "bar">
 
   <p id="welcomeopen" style= "cursor: pointer; margin-left: 16px; font-weight: 700; 
   background-color: rgba(87, 72, 84, 0.125); padding: 8px 12px; border-radius: 10px;">
@@ -52,18 +52,22 @@
     <div style="text-align: center; padding: 16px; filter: drop-shadow(0 0 2px rgb(20, 20, 20));
      width: fit-content">
 
-      <div class= "selected">
-      <img src="./Raining.jpg" style="width: 64px; height: 64px; border-radius: 16px;">
-      </div>
+        <div id = "TUYUopen" class= "selected">
+      <img src="./Raining.jpg" style="width: 68px; height: 64px; border-radius: 16px;">
+        </div>
 
-      <div>
+        <div>
       <p style="margin: 0px; color: #ffffff; ">TUYU</p>
-      </div>
+        </div>
 
     </div>
 
-    <div class= "TUYUdow" id = "TUYU" style = "top: calc(50% - 90px); left: calc(50% - 180px);">
-    <div id = "header" class= "drag2"></div>
+      <div class= "TUYUdow" id = "TUYU" style = "top: calc(50% - 90px); left: calc(50% - 180px); display: none;">
+    <div id = "header" class= "drag2"> <div class="closebutton" id="TUYUclose"> </div>
+    </div>
+      </div>
+
+
     </div>
     <!---->
     </div>
