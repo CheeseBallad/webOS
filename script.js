@@ -57,7 +57,6 @@ function handleWindowTap(element) {
   biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
-  deselectIcon(selectedIcon)
 }
 function addWindowTapHandling(element) {
   element.addEventListener("mousedown", () =>
@@ -66,24 +65,18 @@ function addWindowTapHandling(element) {
 }
 
 //App clicking
-var selectedIcon = undefined
-
-function selectIcon(element) {
-  element.classList.add("selected");
-  selectedIcon = element
-} 
-function deselectIcon(element) {
-  element.classList.remove("selected");
-  selectedIcon = undefined
-}
 function handleIconTap(element) {
-  if (element.classList.contains("selected")) {
-    deselectIcon(element)
-    openWindow(window)
-  } else {
-    selectIcon(element)
-  }
+  openWindow(document.getElementById(element.dataset.window));
 }
+
+//Time
+function updatetime(){
+          var currentTime = new Date().toLocaleString();
+          var timeText = document.querySelector("#timeElement");
+          timeText.innerHTML = currentTime;
+    }
+    setInterval(updatetime, 1000);
+
 
 //initalize windows
 function initializeWindow(elementName) {
