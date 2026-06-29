@@ -25,4 +25,18 @@
  - apps now get highlighted when hovered
  - windows no longer stretches web area
 ## July 27
- 
+ - wrote TUYU biography app information
+ - got discography covers
+ - cleaned HTML
+ - conceptualized app design
+## July 28
+ - completely cleaned up files and folders
+ - organized for better review
+ - TUYU app window now scrolls
+ - created sections
+ - started design
+ - fixed major issues
+## July 29-30 (late evening)
+ - created header animation
+ - finalized welcome text
+ - learned more about CSS design and HTML containers

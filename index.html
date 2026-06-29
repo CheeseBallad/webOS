@@ -3,12 +3,12 @@
 
 <head>
  <script type="module" src="./script.js"></script>
- <script type="module" src="./APPS/TUYU.js"></script>
+ <script type="module" src="./TUYU/TUYU.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css"/>
-  <link rel="stylesheet" type="text/css" href="./APPS/TUYU.css">
+  <link rel="stylesheet" type="text/css" href="./TUYU/TUYU.css">
 </head>
 
-  <body id= "desktop" class = "body" style = "background-image: url(./wallpaper6.png);">
+  <body id= "desktop" class = "body" style = "background-image: url(./ASSETS/wallpapers/wallpaper6.png);">
 
 <!--THE WELCOME WINDOW-->
     <div class="welcome-window" id = "welcome" style = "top: calc(50% - 90px); left: calc(50% - 180px);
@@ -22,10 +22,10 @@
      <div class="closebutton" id="welcomeclose"> </div>
     </div>
 
-  <h1 style = "padding: 10px; margin-left: 10px;">  Whats up</h1>
-  <h2><s>hello</s> ay <dfn><strong>yoo</strong></dfn> </h2>
-  <img style="width: 200px; height: 200px; border-radius: 50px; object-fit: cover" src="./umbrella.jpg" />
-  <p>what</p>
+  <h1 style = "padding: 10px; margin-left: 10px; color: rgb(205, 217, 245); ">Welcome to TuyuOS</h1>
+  <h2 style = "color: rgb(205, 217, 245); ">[Let's get started.]</h2>
+  <img style="width: 200px; height: 200px; border-radius: 50px; object-fit: cover" src="./ASSETS/images/umbrella.jpg" />
+  <p style="color: rgb(192, 192, 192); "><dfn>"この先、土砂降り。"</dfn></p>
  <!-- <a href="https://example.com/">label</a> --> <!--for URL js in case-->
 
     </div>
@@ -51,12 +51,12 @@
     <!--THE APPS-->
     <div id="desktopApps" style="padding-top: 64px; padding-left: 16px;">
 
-    <!--TUYU APP-->
+      <!--TUYU APP-->
     <div style="text-align: center; padding: 16px; filter: drop-shadow(0 0 2px rgb(20, 20, 20));
      width: fit-content">
 
         <div class="app-icon" ondblclick="handleIconTap(this)" data-window="TUYU">
-      <img src="./Raining.jpg" style="width: 68px; height: 64px; border-radius: 16px;">
+      <img src="./ASSETS/images/Raining.jpg" style="width: 68px; height: 64px; border-radius: 16px;">
         </div>
 
         <div>
@@ -72,23 +72,36 @@
 
     <div class="tuyu-scroll">
       <!--meet the legend-->
-    <h1 class = "headertext">TUYU</h1>
-    <img class = "TUYUlogo" src="">
+
+      <section class="tuyu-legend">
+        <div class="kanji">ツユ</div>
+        <img class="TUYUlogo" src="./ASSETS/images/tuyu-logo.png"/>
+      </section>
       <!--biography-->
-    <h2 class="tuyu-heading">About</h2>
-    <p class="tuyu-text">TUYU is a Japanese music unit formed in June 12, 2019.
+      
+      <section class = "tuyu-section">
+      <h2 class="tuyu-heading">About</h2>
+      <p class="tuyu-text" style = "text-align: justify;">TUYU is a Japanese music unit formed in June 12, 2019.
       The group consists of 5 members: guitarist and composer Pusu, female vocalist Rei,
       keyboardist Miro, illustrator Omutatsu, and the animator AzyuN for their music videos.
       The band is famously known for their energetic and rock hard melodies that top the melancholic
       dark themes in the lyrics. </p>
-     <!--discography-->
+      </section>
+      <!--discography-->
+
+      <section class= "tuyu-section">
       <h2 class="tuyu-heading">Discography</h2>
       <div class="tuyu-albums">
-        <img class="tuyu-album" src="./" />
-        <img class="tuyu-album" src="./" />
+        <p class = "tuyu-liner"> Albums </p>
+          <img class="tuyu-album" src="./ASSETS/albums/album-2.jpg" />
+          <img class="tuyu-album" src="./ASSETS/albums/album-3.jpg" />
+          <img class="tuyu-album" src="./ASSETS/albums/album-4.jpg" />
+        <p class = "tuyu-liner"> Singles </p>
+          <img class="tuyu-album" src="./ASSETS/albums/album-1.jpg" />
       </div>
-      
-      </div>
+    </section>
+
+    </div>
 
 
     </div>

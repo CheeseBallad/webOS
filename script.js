@@ -52,6 +52,9 @@ function openWindow(element) {
   biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
+  if (element.id === "TUYU") {
+    setTimeout(() => { resize(); draw(); }, 50);
+  }
 }
 function handleWindowTap(element) {
   biggestIndex++;

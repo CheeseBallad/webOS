@@ -15,7 +15,7 @@ A desktop environment based in the browser, inspired by fancy modern operating s
 I wanted to dive into HTML, CSS, and JavaScript by building something practical, fun, and personal instead of falling into tutorial hell.
 
 ## Future Plans
-- Taskbar (?)
+- Taskbar
 - Calculator app
 - Notes app
 - Weather app
