@@ -80,7 +80,7 @@
   position: relative;
   z-index: 2;
   font-size: 72px;
-  font-weight: 300, bold;
+  font-weight: bold;
   color: #c8d8f0;
   letter-spacing: 0.3em;
   margin-right: -0.3em;
@@ -173,8 +173,3 @@
 .tuyu-liner:first-child {
   margin-top: 0;
 }
-
-
-
-
-

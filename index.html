@@ -2,10 +2,14 @@
 <html>
 
 <head>
- <script type="module" src="./script.js"></script>
- <script type="module" src="./TUYU/TUYU.js"></script>
+  <!--javascript-->
+  <script type="module" src="./script.js"></script>
+  <script type="module" src="./TUYU/TUYU.js"></script>
+  <script type="module" src="./welcome/welcome.js"></script>
+  <!--css-->
   <link rel="stylesheet" type="text/css" href="style.css"/>
   <link rel="stylesheet" type="text/css" href="./TUYU/TUYU.css">
+  <link rel="stylesheet" type="text/css" href="./welcome/welcome.css">
 </head>
 
   <body id= "desktop" class = "body" style = "background-image: url(./ASSETS/wallpapers/wallpaper6.png);">
@@ -38,6 +42,10 @@
  color: rgb(234, 234, 234); padding: 8px 12px; border-radius: 10px;">
     TuyuOS
   </p>
+
+  <div class="rain-toggle" onclick="toggleRain()">
+    <p> rain </p>
+  </div>
 
   <p id="timeElement"
   style = "margin-right: 16px; font-weight: 700; 
@@ -93,13 +101,25 @@
       <h2 class="tuyu-heading">Discography</h2>
       <div class="tuyu-albums">
         <p class = "tuyu-liner"> Albums </p>
+          <img class="tuyu-album" src="./ASSETS/images/Raining.jpg" />
           <img class="tuyu-album" src="./ASSETS/albums/album-2.jpg" />
           <img class="tuyu-album" src="./ASSETS/albums/album-3.jpg" />
           <img class="tuyu-album" src="./ASSETS/albums/album-4.jpg" />
         <p class = "tuyu-liner"> Singles </p>
           <img class="tuyu-album" src="./ASSETS/albums/album-1.jpg" />
+
       </div>
     </section>
+      <!--why tuyu?-->
+    <section class = "tuyu-section">
+      <h2 class="tuyu-heading">Why TUYU?</h2>
+      <p class="tuyu-text" style = "text-align: justify;">I've been an avid fan of TUYU since their early years.
+        Their music has always resonated with me, and I wanted to create my first web project to pay homage to them.
+        I hope that this project can serve as a tribute to their artistry and the impact they have had on my life and that
+        you may also discover their music and appreciate it as much as I do. So keep watch for rainy days, user, and let
+        music accompany you through the storm.
+      </p>
+      </section>
 
     </div>
 

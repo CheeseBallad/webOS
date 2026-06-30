@@ -12,9 +12,29 @@
   z-index: 1;
 }
 
+.rain-toggle {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(96, 130, 200, 0.28);
+  border: 1.5px solid rgba(147, 197, 253, 0.35);
+  color: #bfdbfe;
+  font-size: 12px;
+  line-height: 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+.rain-toggle.off {
+  background: rgba(200, 96, 96, 0.22);
+  border-color: rgba(253, 147, 147, 0.35);
+  color: #fbbfbf;
+}
+
 .body {
   font-family: 'Outfit', sans-serif;
-  background-color: #966bdb;
+  background-color: #694c97;
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -33,34 +53,6 @@
   border: 1.5px solid rgba(147, 197, 253, 0.35);
   color: #bfdbfe;
   cursor: pointer;
-}
-
-.drag {
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background: rgba(62, 73, 97, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  cursor: grab;
-}
-
-.welcome-window {
-  position: absolute;
-  width: 400px;
-  background: rgba(55, 70, 100, 0.8);
-  border-radius: 24px;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.6),
-    inset 0 2px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -0.2px 0 rgba(65, 65, 65, 0.07);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  overflow: hidden;
-  flex-direction: column;
-  font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
 #topbarcontainer {

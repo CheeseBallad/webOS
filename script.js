@@ -143,6 +143,7 @@ function drawRain() {
 
 function toggleRain() {
   rainEnabled = !rainEnabled;
+  document.querySelector('.rain-toggle').classList.toggle('off');
 }
 
 setTimeout(() => { resizeRain(); drawRain(); }, 100);
