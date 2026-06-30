@@ -13,23 +13,15 @@
 }
 
 .rain-toggle {
-  display: inline-flex;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(96, 130, 200, 0.28);
-  border: 1.5px solid rgba(147, 197, 253, 0.35);
-  color: #bfdbfe;
-  font-size: 12px;
-  line-height: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.2s;
+  transition: color 0.2s;
 }
 
-
 .rain-toggle.off {
-  background: rgba(200, 96, 96, 0.22);
-  border-color: rgba(253, 147, 147, 0.35);
-  color: #fbbfbf;
+  color: #ff4d4d;
 }
 
 .body {
