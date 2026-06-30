@@ -26,3 +26,4 @@ I wanted to dive into HTML, CSS, and JavaScript by building something practical,
 ## Credits
 - Some UI elements and aesthetics were inspired by designs I dug through online. I adapted them to fit the primary style (TUYU) of this project.
 (Inspired and guided with https://jams.hackclub.com/batch/webOS !!)
+- rain animation inspired by/ adapted from the official TUYU website

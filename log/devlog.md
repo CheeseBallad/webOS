@@ -40,3 +40,8 @@
  - created header animation
  - finalized welcome text
  - learned more about CSS design and HTML containers
+## July 30
+ - added rain animation to desktop
+ - improved TUYU biography app designs
+ - had trouble implementing rain effect
+ - learned how to inspect websites and reverse engineer animations.

@@ -95,3 +95,55 @@ function initializeWindow(elementName) {
 
 initializeWindow("welcome");
 initializeWindow("TUYU");
+
+//rain effect
+function easeInQuad(t) {
+  return t * t;
+}
+
+const rainCanvas = document.getElementById('desktop-rain');
+const rainCtx = rainCanvas.getContext('2d');
+var rainEnabled = true; // controls on/off
+
+function resizeRain() {
+  rainCanvas.width = window.innerWidth;
+  rainCanvas.height = window.innerHeight;
+}
+
+const rainDrops = Array.from({length: 120}, () => ({
+  x: Math.random() * window.innerWidth,
+  len: 10 + Math.random() * 20,
+  duration: 1 + Math.random() * .5,
+  elapsed: Math.random() * 2,
+  opacity: 0.08 + Math.random() * 0.18
+}));
+
+function drawRain() {
+  if (!rainEnabled) {
+    rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+    requestAnimationFrame(drawRain);
+    return;
+  }
+  rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+  rainDrops.forEach(d => {
+    d.elapsed += 0.016;
+    const t = (d.elapsed % d.duration) / d.duration;
+    const eased = easeInQuad(t);
+    const y = eased * rainCanvas.height;
+
+    rainCtx.beginPath();
+    rainCtx.moveTo(d.x, y);
+    rainCtx.lineTo(d.x - 1, y + d.len);
+    rainCtx.strokeStyle = `rgba(147,197,253,${d.opacity})`;
+    rainCtx.lineWidth = 1;
+    rainCtx.stroke();
+  });
+  requestAnimationFrame(drawRain);
+}
+
+function toggleRain() {
+  rainEnabled = !rainEnabled;
+}
+
+setTimeout(() => { resizeRain(); drawRain(); }, 100);
+window.addEventListener('resize', resizeRain);
