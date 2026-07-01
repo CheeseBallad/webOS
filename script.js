@@ -47,7 +47,6 @@ var topBar = document.querySelector("#top")
 
 function closeWindow(element) {
   element.style.display = "none"
-  if (selectedIcon) deselectIcon(selectedIcon);
   openWindows = openWindows.filter(w => w.el !== element);
   removePillDot(element);
 }
@@ -94,9 +93,11 @@ function addPillDot(element) {
 
 function removePillDot(element) {
   const dot = document.querySelector(`.pill-dot[data-window="${element.id}"]`);
+  console.log("removing dot for", element.id, "dot found:", dot);
   if (dot) dot.remove();
 
   const pill = document.getElementById('app-open');
+  console.log("remaining dots:", pill.querySelectorAll('.pill-dot').length);
   if (pill.querySelectorAll('.pill-dot').length === 0) {
     pill.style.display = 'none';
   }
