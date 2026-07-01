@@ -13,6 +13,10 @@
 }
 
 .rain-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
@@ -27,6 +31,9 @@
 .app-open {
   display: none;
   display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   align-items: center;
   gap: 6px;
   padding: 0px 6px;
