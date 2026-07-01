@@ -40,22 +40,68 @@ function dragElement(element) {
 }
 
 var biggestIndex = 1;
+var openWindows = [];
 var topBar = document.querySelector("#top")
 
-//open and close
+//open and close minimize
+
 function closeWindow(element) {
   element.style.display = "none"
+  if (selectedIcon) deselectIcon(selectedIcon);
+  openWindows = openWindows.filter(w => w.el !== element);
+  removePillDot(element);
 }
 function openWindow(element) {
-  element.style.display = "flex"
+  element.style.display = "flex";
   element.style.height = "";
   biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
+
   if (element.id === "TUYU") {
     setTimeout(() => { resize(); draw(); }, 50);
   }
+
+  if (!openWindows.find(w => w.el === element)) {
+    openWindows.push({ el: element, minimized: false });
+    addPillDot(element);
+  } else {
+    const entry = openWindows.find(w => w.el === element);
+    if (entry) entry.minimized = false;
+    const dot = document.querySelector(`.pill-dot[data-window="${element.id}"]`);
+    if (dot) dot.style.opacity = "1";
+  }
 }
+
+function minimizeWindow(element) {
+  element.style.display = "none";
+  const entry = openWindows.find(w => w.el === element);
+  if (entry) entry.minimized = true;
+  const dot = document.querySelector(`.pill-dot[data-window="${element.id}"]`);
+  if (dot) dot.style.opacity = "0.4";
+}
+
+function addPillDot(element) {
+  const pill = document.getElementById('app-open');
+  pill.style.display = 'flex'; // ensure it's visible
+  const dot = document.createElement('div');
+  dot.className = 'pill-dot';
+  dot.dataset.window = element.id;
+  dot.style.background = element.dataset.color || "#6082c8";
+  dot.addEventListener('click', () => openWindow(element));
+  pill.appendChild(dot);
+}
+
+function removePillDot(element) {
+  const dot = document.querySelector(`.pill-dot[data-window="${element.id}"]`);
+  if (dot) dot.remove();
+
+  const pill = document.getElementById('app-open');
+  if (pill.querySelectorAll('.pill-dot').length === 0) {
+    pill.style.display = 'none';
+  }
+}
+
 function handleWindowTap(element) {
   biggestIndex++;
   element.style.zIndex = biggestIndex;
@@ -69,7 +115,8 @@ function addWindowTapHandling(element) {
 
 //App clicking
 function handleIconTap(element) {
-  openWindow(document.getElementById(element.dataset.window));
+  const target = document.getElementById(element.dataset.window);
+  openWindow(target);
 }
 
 //Time
@@ -82,19 +129,25 @@ function updatetime(){
 
 
 //initalize windows
-function initializeWindow(elementName) {
+function initializeWindow(elementName, color) {
   var screen = document.querySelector("#" + elementName);
+  screen.dataset.color = color || "#6082c8";
+
   dragElement(screen);
   addWindowTapHandling(screen);
 
   var closeBtn = document.querySelector("#" + elementName + "close");
+  var minimizeBtn = document.querySelector("#" + elementName + "minimize");
   var openBtn  = document.querySelector("#" + elementName + "open");
   if (closeBtn) closeBtn.addEventListener("click", () => closeWindow(screen));
+  if (minimizeBtn) minimizeBtn.addEventListener("click", () => minimizeWindow(screen));
   if (openBtn)  openBtn.addEventListener("click",  () => openWindow(screen));
 }
 
-initializeWindow("welcome");
-initializeWindow("TUYU");
+initializeWindow("welcome", "#6082c8");
+initializeWindow("TUYU", "#a78bda");
+
+openWindow(document.getElementById("welcome"));
 
 //rain effect
 function easeInQuad(t) {

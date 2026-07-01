@@ -20,6 +20,10 @@
 
 <!--CLOSE BUTTON-->
      <div class="closebutton" id="welcomeclose"> </div>
+
+<!--MINIMIZE BUTTON-->
+    <div class="minimizebutton" id="welcomeminimize"> </div>
+
     </div>
 
   <h1 style = "padding: 10px; margin-left: 10px; color: rgb(205, 217, 245); font-size: 34px;">Welcome to TuyuOS</h1>
@@ -40,8 +44,10 @@
   </p>
 
   <div class="rain-toggle" onclick="toggleRain()">
-    <p> Rain Toggle</p>
+    <p> Rain</p>
   </div>
+
+  <div class= "app-open" id = "app-open"></div>
 
   <p id="timeElement"
   style = "margin-right: 16px; font-weight: 700; 
@@ -60,7 +66,7 @@
      width: fit-content">
 
         <div class="app-icon" ondblclick="handleIconTap(this)" data-window="TUYU">
-      <img src="./ASSETS/images/Raining.jpg" style="width: 68px; height: 64px; border-radius: 16px;">
+        <img src="./ASSETS/images/Raining.jpg" style="width: 68px; height: 64px; border-radius: 16px;">
         </div>
 
         <div>
@@ -70,9 +76,13 @@
     </div>
     <!--TUYU Window-->
       <div class= "TUYUwindow" id = "TUYU" style = "top: calc(50% - 90px); left: calc(50% - 180px); display: none;">
+    <!--drag area-->
     <div id = "TUYUheader" class= "drag2">
+    <!--close button-->
     <div class="closebutton" id="TUYUclose"> </div>
-    </div>
+    <!--minimize button-->
+    <div class="minimizebutton" id="TUYUminimize"> </div>
+      </div>
 
     <div class="tuyu-scroll">
       <!--meet the legend-->
