@@ -17,10 +17,8 @@
 
 <!--DRAG AREA-->
     <div class= "drag" id="welcomeheader"> 
-
 <!--CLOSE BUTTON-->
      <div class="closebutton" id="welcomeclose"> </div>
-
 <!--MINIMIZE BUTTON-->
     <div class="minimizebutton" id="welcomeminimize"> </div>
 
@@ -38,7 +36,8 @@
     <div id = "topbarcontainer">
     <div id = "top" class= "bar">
 
-  <p id="welcomeopen" style= "cursor: pointer; margin-left: 16px; font-weight: 700; 
+  <p onclick="handleIconTap(this)" data-window="welcome" style= "cursor: pointer;
+   margin-left: 16px; font-weight: 700; 
  color: rgb(234, 234, 234); padding: 8px 12px; border-radius: 10px;">
     TuyuOS
   </p>
@@ -66,7 +65,7 @@
      width: fit-content">
 
         <div class="app-icon" ondblclick="handleIconTap(this)" data-window="TUYU">
-        <img src="./ASSETS/images/Raining.jpg" style="width: 68px; height: 64px; border-radius: 16px;">
+        <img src="./ASSETS/images/Raining.jpg" style="width: 66px; height: 64px; border-radius: 16px;">
         </div>
 
         <div>
@@ -131,6 +130,33 @@
 
 
     </div>
+
+
+    <!--Weather-->
+    <div style="text-align: center; padding: 16px; filter: drop-shadow(0 0 2px rgb(20, 20, 20));
+     width: fit-content">
+
+        <div class="app-icon" ondblclick="handleIconTap(this)" data-window="Weather">
+        <img src="./ASSETS/images/Weather.jpg" style="width: 66px; height: 64px; border-radius: 16px;">
+        </div>
+        
+        <div>
+      <p style="margin: 0px; color: #ffffff; ">Weather</p>
+        </div>
+    </div>
+
+    <!--Weather Window-->
+      <div class= "Weatherwindow" id = "Weather" style = "top: calc(50% - 90px); left: calc(50% - 180px); display: none;">
+    <!--drag area-->
+    <div id = "Weatherheader" class= "drag2">
+    <!--close button-->
+    <div class="closebutton" id="Weatherclose"> </div>
+    <!--minimize button-->
+    <div class="minimizebutton" id="Weatherminimize"> </div>
+      </div>    
+    
+    </div>
+
     <!---->
     </div>
 
