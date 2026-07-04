@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="style.css"/>
   <link rel="stylesheet" type="text/css" href="./TUYU/TUYU.css">
   <link rel="stylesheet" type="text/css" href="./welcome/welcome.css">
+  <link rel="stylesheet" type="text/css" href="./Weather/weather.css">
 </head>
 
   <body id= "desktop" class = "body" style = "background-image: url(./ASSETS/wallpapers/wallpaper6.png);">
@@ -53,6 +54,7 @@
     </div>
     </div>
 
+<!--RAIN TOGGLE-->
    <div class="rain-toggle" onclick="toggleRain()">
     <p> Rain</p>
     </div>
@@ -139,22 +141,54 @@
         <div class="app-icon" ondblclick="handleIconTap(this)" data-window="Weather">
         <img src="./ASSETS/images/Weather.jpg" style="width: 66px; height: 64px; border-radius: 16px;">
         </div>
-        
+
         <div>
       <p style="margin: 0px; color: #ffffff; ">Weather</p>
         </div>
     </div>
 
     <!--Weather Window-->
-      <div class= "Weatherwindow" id = "Weather" style = "top: calc(50% - 90px); left: calc(50% - 180px); display: none;">
+      <div class= "card" id = "Weather" style = "top: calc(50% - 90px); left: calc(50% - 180px); display: none;">
     <!--drag area-->
-    <div id = "Weatherheader" class= "drag2">
+    <div id = "Weatherheader" class= "drag3">
     <!--close button-->
     <div class="closebutton" id="Weatherclose"> </div>
     <!--minimize button-->
     <div class="minimizebutton" id="Weatherminimize"> </div>
       </div>    
-    
+
+    <div class="weather-area">
+    <div class = "search">
+      <input type="text" id="cityInput" placeholder="Enter city name" spellcheck="false">
+      <button> <img src = "./ASSETS/weather-images/search.png" alt="Search"> </button>
+    </div>
+    <div class= "weather">
+      <img src = "./ASSETS/weather-images/rain.png" class = "weather-icon">
+      <h1 class = "temp">22°C</h1>
+      <h2 class="city">Gensokyo</h2>
+
+      <div class="details">
+        <div class="col">
+        <img src = "./ASSETS/weather-images/humidity.png">
+        <div>
+          <p class="humidity">0%</p>
+          <p>Humidity</p>
+        </div>
+      </div>
+      </div>
+
+      <div class="col">
+        <img src = "./ASSETS/weather-images/wind.png">
+        <div>
+          <p class="wind">100 km/h</p>
+          <p>Wind Speed</p>
+        </div>
+      </div>
+      </div>
+      
+
+    </div>
+
     </div>
 
     <!---->
@@ -164,6 +198,7 @@
     <script src="script.js"></script>
     <script src="./TUYU/TUYU.js"></script>
     <script src="./welcome/welcome.js"></script>
+    <script src="./Weather/weather.js"></script>
   </body>
 
 </html>

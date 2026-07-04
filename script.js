@@ -147,6 +147,7 @@ function initializeWindow(elementName, color) {
 
 initializeWindow("welcome", "#6082c8");
 initializeWindow("TUYU", "#a78bda");
+initializeWindow("Weather", "#52cc7f");
 
 openWindow(document.getElementById("welcome"));
 
