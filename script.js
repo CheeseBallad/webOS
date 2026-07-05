@@ -93,7 +93,6 @@ function addPillDot(element) {
 
 function removePillDot(element) {
   const dot = document.querySelector(`.pill-dot[data-window="${element.id}"]`);
-  console.log("removing dot for", element.id, "dot found:", dot);
   if (dot) dot.remove();
 
   const pill = document.getElementById('app-open');

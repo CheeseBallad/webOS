@@ -1,5 +1,6 @@
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
+const weatherIcon = document.querySelector(".weather-icon");
 
 async function getCoordinates(city) {
   const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
@@ -31,6 +32,35 @@ async function checkWeather(city) {
   document.querySelector(".humidity").innerHTML = data.current.relative_humidity_2m + "%";
   document.querySelector(".wind").innerHTML = data.current.wind_speed_10m + " km/h";
 
+  const condition = data.current.weathercode;
+
+  if (condition === 0) {
+  weatherIcon.src = "./ASSETS/weather-images/clear.png";
+} 
+  else if (condition <= 3){
+  weatherIcon.src = "./ASSETS/weather-images/clouds.png";
+} 
+  else if (condition <= 48){
+  weatherIcon.src = "./ASSETS/weather-images/mist.png";
+} 
+  else if (condition <= 55) {
+  weatherIcon.src = "./ASSETS/weather-images/drizzle.png";
+} 
+  else if (condition <= 67) {
+  weatherIcon.src = "./ASSETS/weather-images/rain.png";
+} 
+  else if (condition <= 77) {
+  weatherIcon.src = "./ASSETS/weather-images/snowy.png";
+} 
+  else if (condition <= 82) {
+  weatherIcon.src = "./ASSETS/weather-images/rain.png";
+} 
+  else if (condition <= 86) {
+  weatherIcon.src = "./ASSETS/weather-images/snowy.png";
+} 
+else if (condition >= 95) {
+  weatherIcon.src = "./ASSETS/weather-images/rain.png";
+}
   console.log(data);
 }
 
