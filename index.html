@@ -155,34 +155,37 @@
     <div class="minimizebutton" id="Weatherminimize"> </div>
       </div>    
 
-    <div class="weather-area">
-    <div class = "search">
-      <input type="text" id="cityInput" placeholder="Enter city name" spellcheck="false">
-      <button> <img src = "./ASSETS/weather-images/search.png" alt="Search"> </button>
-    </div>
-    <div class= "weather">
+      <div class = "weather-bg"> </div>
+
+      <!--permission-->
+      <div class="weather-permission" id="weather-permission">
+      <p class="permission-label">TuyuOS wants to know your location</p>
+      <div class="permission-btn" onclick="requestLocation()">Allow Location</div>
+      </div>
+
+
+    <div class="weather-content" id="weather-content" style="display: none;">
+
+    <div class= "weather-opening">
       <img src = "./ASSETS/weather-images/rain.png" class = "weather-icon">
+      <div class = "weather-text">
       <h1 class = "temp">22°C</h1>
       <h2 class="city">Gensokyo</h2>
+      </div>
+    </div>
 
-      <div class="details">
-        <div class="col">
-        <img src = "./ASSETS/weather-images/humidity.png">
-        <div>
-          <p class="humidity">0%</p>
-          <p>Humidity</p>
-        </div>
+      <div class="weather-stats">
+      <div class="stat">
+        <img src="./ASSETS/weather-images/humidity.png">
+        <p class="humidity">0%</p>
+        <p class="stat-label">Humidity</p>
       </div>
+      <div class="stat">
+        <img src="./ASSETS/weather-images/wind.png">
+        <p class="wind">100 km/h</p>
+        <p class="stat-label">Wind</p>
       </div>
-
-      <div class="col">
-        <img src = "./ASSETS/weather-images/wind.png">
-        <div>
-          <p class="wind">100 km/h</p>
-          <p>Wind Speed</p>
-        </div>
-      </div>
-      </div>
+    </div>
       
 
     </div>
