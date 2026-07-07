@@ -1,6 +1,8 @@
 # TuyuOS
-
 A desktop environment based in the browser, inspired by fancy modern operating systems.
+
+## Demo
+https://tuyu-os.vercel.app/
 
 ## Features
 - Top bar
@@ -8,20 +10,30 @@ A desktop environment based in the browser, inspired by fancy modern operating s
 - Welcome window (draggable and closable btw)
 - Wallpaper support (currently one wallpaper)
 - Working window system
-- Desktop interface and design (WIP)
-- Tuyu biography app and working window
+- Desktop interface and design
+- Tuyu biography app
 - Rain desktop animationn
+- Weather app
 
 ## Why I made this
 I wanted to dive into HTML, CSS, and JavaScript by building something practical, fun, and personal instead of falling into tutorial hell.
 
+## Development
+This is my first project of this scale. THroughout the development I documented my progress with daily devlogs and screenshots as I refined my learning and skills.
+
+## Tech Stack
+- Javascript (Vanilla)
+- CSS3
+- HTML5
+- OpenMetro API (Weather data)
+- Git & Github (Version control, hosting)
+
 ## Future Plans
-- Taskbar
+- Weather moods (very spicy I promise)
+- Lockscreen
 - Calculator app
-- Notes app
-- Weather app
-- Music player (probably TUYU)
-- More animations and UI elements
+- Music player (TUYU songs)
+- smoother animations and elements
 - More TUYU!
 
 ## Credits
