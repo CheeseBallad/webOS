@@ -41,7 +41,7 @@
  - finalized welcome text
  - learned more about CSS design and HTML containers
 ## June 30
- - added rain animation to desktop
+ - added rain animation to desktop found through inspecting the TUYU website (yes copyright allows me)
  - improved TUYU biography app designs
  - had trouble implementing rain effect
  - learned how to inspect websites and reverse engineer animations.
