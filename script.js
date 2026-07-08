@@ -53,9 +53,6 @@ function closeWindow(element) {
 function openWindow(element) {
   element.style.display = "flex";
   element.style.height = "";
-  element.style.top = "50%";
-  element.style.left = "50%";
-  element.style.transform = "translate(-50%, -50%)";
   biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
@@ -65,6 +62,9 @@ function openWindow(element) {
   }
 
   if (!openWindows.find(w => w.el === element)) {
+    element.style.top = "50%";
+    element.style.left = "50%";
+    element.style.transform = "translate(-50%, -50%)";
     openWindows.push({ el: element, minimized: false });
     addPillDot(element);
   } else {
