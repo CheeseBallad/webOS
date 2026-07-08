@@ -1,4 +1,44 @@
 const weatherIcon = document.querySelector(".weather-icon");
+const weatherBg = document.querySelector(".weather-bg");
+
+const weatherDesc = {
+  0: "Summer Breeze", //Clear skies
+  1: "Summer Breeze",
+  2: "Overcast Skies", //Cloudy
+  3: "Overcast Skies",
+  45: "Hide and Seek Alone", //Fog or mist
+  48: "Hide and Seek Alone",
+  51: "Heavy Rain Fall", //HEAVY rain
+  53: "Heavy Rain Fall",
+  55: "Heavy Rain Fall",
+  61: "It's Raining After All", //Light to moderate rain
+  63: "It's Raining After All",
+  65: "It's Raining After All",
+  66: "It's Raining After All",
+  67: "It's Raining After All",
+  71: "When Morning Glory Falls", //Snow
+  73: "When Morning Glory Falls",
+  75: "When Morning Glory Falls",
+  77: "When Morning Glory Falls",
+  80: "It's Raining After All",
+  81: "It's Raining After All",
+  82: "Heavy Rain Fall",
+  85: "When Morning Glory Falls",
+  86: "When Morning Glory Falls",
+  95: "Heavy Rain Fall",
+  96: "Heavy Rain Fall",
+  99: "Heavy Rain Fall"
+};
+
+const weatherBgs = {
+  "Summer Breeze":           "./ASSETS/weather-images/summer_breeze.jpg",
+  "Overcast Skies":          "./ASSETS/weather-images/overcast_skies.jpg",
+  "Hide and Seek Alone":     "./ASSETS/weather-images/hide_and_seek_alone.jpg",
+  "Heavy Rain Fall":         "./ASSETS/weather-images/rain_fall.jpg",
+  "It's Raining After All":  "./ASSETS/weather-images/raining_after_all.jpg",
+  "When Morning Glory Falls":"./ASSETS/weather-images/morning_glory_falls.jpg"
+};
+
 
 //Permission request
 function requestLocation() {
@@ -40,6 +80,8 @@ const geoResponse = await fetch(
 
   // Icon changes
   const condition = data.current.weathercode;
+  const desc = weatherDesc[condition] || "It's Raining After All";
+  document.querySelector(".condition").innerHTML = desc;
   if (condition === 0) {
     weatherIcon.src = "./ASSETS/weather-images/clear.png";} 
     else if (condition <= 3) {
@@ -65,5 +107,9 @@ const geoResponse = await fetch(
   } 
     else if (condition >= 95) {
     weatherIcon.src = "./ASSETS/weather-images/rain.png";
+  }
+  // BG changes
+if (weatherBgs[desc]) {
+    weatherBg.style.backgroundImage = `url('${weatherBgs[desc]}')`;
   }
 }

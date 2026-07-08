@@ -53,6 +53,9 @@ function closeWindow(element) {
 function openWindow(element) {
   element.style.display = "flex";
   element.style.height = "";
+  element.style.top = "50%";
+  element.style.left = "50%";
+  element.style.transform = "translate(-50%, -50%)";
   biggestIndex++;
   element.style.zIndex = biggestIndex;
   topBar.style.zIndex = biggestIndex + 1;
