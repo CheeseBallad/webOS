@@ -82,4 +82,6 @@ AI was used as a learning and assistance tool rather than a code generator. AI w
 All code was manually reviewed, modified, and integrated by me. The project's features, architecture, styling decisions, and final implementations were designed, built, and customized by myself.
 
 
+
+
 Horizons Arcana submission!
