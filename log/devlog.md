@@ -1,10 +1,13 @@
-## June 22- July 23
+## Devlog of progress
+the log of a novice learning things as they build
+
+## June 22-23
  - created initial repository and structure
  - created first desktop layout and backround wallpapers
  - created basic top bar and welcome window
  - created a live clock
  - made welcome window draggable and closable and openable 
- - started app icon
+ - started making the desktop app icons
  - created readme and organized files
  - fixed display issues
 ## June 24
@@ -13,7 +16,7 @@
     - frosted glass window (my personal preference)
     - new close button and drag area
  - new wallpaper
- - made second window draggable
+ - made second application window draggable
  - fixed topbar and positioning of other elements
 ## June 25
  - initialized app icon and window
@@ -59,5 +62,30 @@
  - beyond 20 hours for Arcana rvsp ticket
 ## July 4
  - weather window initialized
- - added icons and made the window draggable and closable
- - 
+ - added icons and made the window draggable, closable, and reopenable
+ - Planned the remaining roadmap before submission
+## July 5
+ - Integrated weather API from OpenMeteo
+ - City search works
+ - Updated sizes and orientation of elements in window
+ - Made weather icon update (woohoo)
+## JUly 6
+ - created permission screen, button
+ - adjusted weather window design to fit better
+ - Implemented automatic location detection using another OpenMeteo endpoint instead of searching (yuck)
+ ## July 7
+ - HUGE UI improvement, moved elements, copied welcome window style
+ - elements now more spaced and looks nicer
+ (.2)
+ - UI changed again, inspired by a certain dribble look i liked
+ - condition text (Inspired by TUYU songs)
+ - Redesigned weather data to show vertically
+## July 8
+ - Fixed the UI elements, Icon overflows for a nice effect
+ (.2)
+ - FINALIZED weather window design. Background now changes based on live weather condition using TUYU MVs.
+ - fixed window opening bug
+ ## July 9 (D-day)
+ - Polished up README file, APP instructions and important stuff.
+ - Off to ship first project for Horizons Arcana
+ - 30hrs, 10 mins logged at the moment of writting

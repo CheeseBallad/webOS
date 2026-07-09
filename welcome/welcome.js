@@ -1,0 +1,1 @@
+// Preparation for welcome.js
