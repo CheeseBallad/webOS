@@ -112,4 +112,8 @@ const geoResponse = await fetch(
 if (weatherBgs[desc]) {
     weatherBg.style.backgroundImage = `url('${weatherBgs[desc]}')`;
   }
+
+  if (typeof setWeatherMood === 'function') {
+  setWeatherMood(desc);
+}
 }

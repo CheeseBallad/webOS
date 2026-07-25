@@ -5,12 +5,20 @@
   <!--javascript-->
   <link rel="stylesheet" type="text/css" href="style.css"/>
   <link rel="stylesheet" type="text/css" href="./TUYU/TUYU.css">
+  <link rel="stylesheet" type="text/css" href="./Moods/mood.css">
   <link rel="stylesheet" type="text/css" href="./welcome/welcome.css">
   <link rel="stylesheet" type="text/css" href="./Weather/weather.css">
 </head>
 
   <body id= "desktop" class = "body" style = "background-image: url(./ASSETS/wallpapers/wallpaper6.png);">
      <canvas id="desktop-rain"></canvas>
+
+     <!--weather moods-->
+     <div id="mood-overlay"></div>
+     <div id="mood-apparition"></div>
+     <canvas id="desktop-flash"></canvas>
+
+
 <!--THE WELCOME WINDOW-->
     <div class="welcome-window" id = "welcome" style = "top: calc(50% - 90px); left: calc(50% - 180px);
      text-align: center; flex-direction: column;
@@ -194,6 +202,7 @@
     <!--javascript-->
     <script src="script.js"></script>
     <script src="./TUYU/TUYU.js"></script>
+    <script src="./Moods/mood.js"></script>
     <script src="./welcome/welcome.js"></script>
     <script src="./Weather/weather.js"></script>
   </body>

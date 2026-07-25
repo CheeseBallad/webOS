@@ -202,6 +202,3 @@ function toggleRain() {
   rainEnabled = !rainEnabled;
   document.querySelector('.rain-toggle').classList.toggle('off');
 }
-
-setTimeout(() => { resizeRain(); drawRain(); }, 100);
-window.addEventListener('resize', resizeRain);
