@@ -70,7 +70,10 @@ function setWeatherMood(desc) {
 
   // always stop flash first
   stopFlash();
+  stopMist();
+
   if (desc === "Heavy Rain Fall") scheduleFlash();
+  if (desc === "Hide and Seek Alone") startMist();
 
   rainEnabled = mood.rainEnabled;
   if (mood.rainEnabled) {
@@ -91,7 +94,6 @@ function setWeatherMood(desc) {
 
   document.querySelector('.rain-toggle').classList.toggle('off', !mood.rainEnabled);
 }
-
 //test moods
 function testMood(mood) {
   const validMoods = [
@@ -113,7 +115,6 @@ function testMood(mood) {
 }
 
 // lightning flashes
-
 const flashCanvas = document.getElementById('desktop-flash');
 const flashCtx = flashCanvas.getContext('2d');
 let flashAlpha = 0;
@@ -161,3 +162,66 @@ function drawFlash() {
 
 setTimeout(() => { resizeFlash(); drawFlash(); }, 100);
 window.addEventListener('resize', resizeFlash);
+
+//Mist
+const mistCanvas = document.getElementById('desktop-mist');
+const mistCtx = mistCanvas.getContext('2d');
+let mistActive = false;
+
+function resizeMist() {
+  mistCanvas.width = window.innerWidth;
+  mistCanvas.height = window.innerHeight;
+}
+
+const mistLayers = Array.from({length: 8}, (_, i) => ({
+  yRatio: i / 8,
+  speed: 0.0002 + Math.random() * 0.0003,
+  offset: Math.random() * 1000,
+  opacity: 0.05 + Math.random() * 0.09,
+  height: 100 + Math.random() * 140,
+}));
+
+const mistParticles = Array.from({length: 30}, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  size: 1 + Math.random() * 2,
+  speed: 0.00005 + Math.random() * 0.0001,
+  opacity: 0.03 + Math.random() * 0.08,
+  offset: Math.random() * 1000
+}));
+
+function drawMist(ts) {
+  mistCtx.clearRect(0, 0, mistCanvas.width, mistCanvas.height);
+  if (mistActive) {
+    mistLayers.forEach(l => {
+      const y = l.yRatio * mistCanvas.height;
+      const drift = Math.sin(ts * l.speed + l.offset) * 50;
+      const breathe = Math.sin(ts * 0.0003 + l.offset) * 0.03;
+      const op = Math.max(0, l.opacity + breathe);
+      const grad = mistCtx.createLinearGradient(0, y + drift - 30, 0, y + drift + l.height + 30);
+      grad.addColorStop(0, 'transparent');
+      grad.addColorStop(0.3, `rgba(150, 162, 195, ${op})`);
+      grad.addColorStop(0.7, `rgba(150, 162, 195, ${op})`);
+      grad.addColorStop(1, 'transparent');
+      mistCtx.fillStyle = grad;
+      mistCtx.fillRect(0, y + drift - 30, mistCanvas.width, l.height + 60);
+    });
+
+    mistParticles.forEach(p => {
+      const x = (p.x + ts * p.speed) % 1;
+      const y = p.y * mistCanvas.height;
+      const breathe = Math.sin(ts * 0.0004 + p.offset) * 0.03;
+      mistCtx.beginPath();
+      mistCtx.arc(x * mistCanvas.width, y, p.size, 0, Math.PI * 2);
+      mistCtx.fillStyle = `rgba(180, 190, 220, ${Math.max(0, p.opacity + breathe)})`;
+      mistCtx.fill();
+    });
+  }
+  requestAnimationFrame(drawMist);
+}
+
+function startMist() { mistCanvas.style.display = 'block'; mistActive = true; }
+function stopMist()  { mistCanvas.style.display = 'none';  mistActive = false; }
+
+setTimeout(() => { resizeMist(); requestAnimationFrame(drawMist); }, 100);
+window.addEventListener('resize', resizeMist);
