@@ -89,3 +89,11 @@ the log of a novice learning things as they build
  - Polished up README file, APP instructions and important stuff.
  - Off to ship first project for Horizons Arcana
  - 30hrs, 10 mins logged at the moment of writting
+
+ ## July 25
+ - initialized weather moods
+ - created basic lighting and opacity changes
+ - synced with other desktop features
+ ## July 27
+ - improved heavy rain mood, now w/ lightning
+ - improved mist mood now with moving mist

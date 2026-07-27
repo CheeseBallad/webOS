@@ -7,7 +7,7 @@ const moodApparitions = {
   "Heavy Rain Fall": "雨が降る",
   "When Morning Glory Falls": "明けない夜が降る、雪が降る"
 };
-
+// Mood settings
 const moodSettings = {
   "Summer Breeze": {
     overlay: "rgba(255, 200, 100, 0.08)",
@@ -50,30 +50,30 @@ const moodSettings = {
     rainEnabled: false,
   }
 };
-
+//Mood function
 function setWeatherMood(desc) {
   const mood = moodSettings[desc];
   if (!mood) return;
 
-  // overlay
   const overlay = document.getElementById('mood-overlay');
   overlay.style.background = mood.overlay;
   overlay.style.opacity = mood.overlayOpacity;
 
   document.body.style.filter = `brightness(${mood.wallpaperBrightness})`;
 
-  // apparition woah
   const apparition = document.getElementById('mood-apparition');
   apparition.style.opacity = 0;
   setTimeout(() => {
     apparition.innerHTML = moodApparitions[desc] || "";
     apparition.style.opacity = 0.06;
-  }, 1000); // fade in after 1s delay
+  }, 1000);
 
-  // rain settings
+  // always stop flash first
+  stopFlash();
+  if (desc === "Heavy Rain Fall") scheduleFlash();
+
   rainEnabled = mood.rainEnabled;
   if (mood.rainEnabled) {
-    // adjust existing drops speed
     rainDrops.forEach(d => {
       d.duration = (0.5 + Math.random() * 0.5) / mood.rainSpeed;
     });
@@ -86,13 +86,9 @@ function setWeatherMood(desc) {
         opacity: 0.08 + Math.random() * 0.18
       });
     }
-
-    if (rainDrops.length > mood.rainCount) {
-      rainDrops.splice(mood.rainCount);
-    }
+    if (rainDrops.length > mood.rainCount) rainDrops.splice(mood.rainCount);
   }
 
-  // toggle button sync
   document.querySelector('.rain-toggle').classList.toggle('off', !mood.rainEnabled);
 }
 
@@ -116,5 +112,52 @@ function testMood(mood) {
   console.log("Mood set to:", mood);
 }
 
-setTimeout(() => { resizeRain(); drawRain(); }, 100);
-window.addEventListener('resize', resizeRain);
+// lightning flashes
+
+const flashCanvas = document.getElementById('desktop-flash');
+const flashCtx = flashCanvas.getContext('2d');
+let flashAlpha = 0;
+let flashActive = false;
+let flashTimeout;
+
+function resizeFlash() {
+  flashCanvas.width = window.innerWidth;
+  flashCanvas.height = window.innerHeight;
+}
+
+function triggerFlash() {
+  flashAlpha = 0.5 + Math.random() * 0.4;
+  flashActive = true;
+}
+
+function scheduleFlash() {
+  clearTimeout(flashTimeout);
+  flashTimeout = setTimeout(() => {
+    triggerFlash();
+    scheduleFlash();
+  }, 3000 + Math.random() * 6000);
+}
+
+function stopFlash() {
+  clearTimeout(flashTimeout);
+  flashActive = false;
+  flashAlpha = 0;
+  flashCtx.clearRect(0, 0, flashCanvas.width, flashCanvas.height);
+}
+
+function drawFlash() {
+  if (!flashActive) {
+    requestAnimationFrame(drawFlash);
+    return;
+  }
+  flashCtx.clearRect(0, 0, flashCanvas.width, flashCanvas.height);
+  if (flashAlpha > 0) {
+    flashCtx.fillStyle = `rgba(220, 230, 255, ${flashAlpha})`;
+    flashCtx.fillRect(0, 0, flashCanvas.width, flashCanvas.height);
+    flashAlpha = Math.max(0, flashAlpha - 0.04);
+  }
+  requestAnimationFrame(drawFlash);
+}
+
+setTimeout(() => { resizeFlash(); drawFlash(); }, 100);
+window.addEventListener('resize', resizeFlash);
