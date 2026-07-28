@@ -71,9 +71,11 @@ function setWeatherMood(desc) {
   // always stop flash first
   stopFlash();
   stopMist();
+  stopSun();
 
   if (desc === "Heavy Rain Fall") scheduleFlash();
   if (desc === "Hide and Seek Alone") startMist();
+  if (desc === "Summer Breeze") startSun();
 
   rainEnabled = mood.rainEnabled;
   if (mood.rainEnabled) {
@@ -225,3 +227,63 @@ function stopMist()  { mistCanvas.style.display = 'none';  mistActive = false; }
 
 setTimeout(() => { resizeMist(); requestAnimationFrame(drawMist); }, 100);
 window.addEventListener('resize', resizeMist);
+
+// SUN RAYS
+const sunCanvas = document.getElementById('desktop-sun');
+const sunCtx = sunCanvas.getContext('2d');
+let sunActive = false;
+
+function resizeSun() {
+  sunCanvas.width = window.innerWidth;
+  sunCanvas.height = window.innerHeight;
+}
+
+const sunRays = Array.from({length: 12}, (_, i) => ({
+  angle: (i / 12) * Math.PI * 0.75 + Math.PI * 0.6,
+  width: 0.04 + Math.random() * 0.07,
+  offset: Math.random() * 1000,
+  speed: 0.0002 + Math.random() * 0.0003
+}));
+
+function drawSun(ts) {
+  sunCtx.clearRect(0, 0, sunCanvas.width, sunCanvas.height);
+  if (sunActive) {
+    const cx = sunCanvas.width * 0.88;
+    const cy = -30;
+
+    // ambient glow
+    const glow = sunCtx.createRadialGradient(cx, cy, 0, cx, cy, sunCanvas.width * 0.8);
+    glow.addColorStop(0, 'rgba(255, 210, 100, 0.1)');
+    glow.addColorStop(1, 'transparent');
+    sunCtx.fillStyle = glow;
+    sunCtx.fillRect(0, 0, sunCanvas.width, sunCanvas.height);
+
+    // rays
+    sunRays.forEach(r => {
+      const breathe = Math.sin(ts * r.speed + r.offset) * 0.015;
+      const len = sunCanvas.width * 1.8;
+      const a1 = r.angle - r.width / 2;
+      const a2 = r.angle + r.width / 2;
+
+      sunCtx.beginPath();
+      sunCtx.moveTo(cx, cy);
+      sunCtx.lineTo(cx + Math.cos(a1) * len, cy + Math.sin(a1) * len);
+      sunCtx.lineTo(cx + Math.cos(a2) * len, cy + Math.sin(a2) * len);
+      sunCtx.closePath();
+
+      const grad = sunCtx.createLinearGradient(cx, cy, cx + Math.cos(r.angle) * len, cy + Math.sin(r.angle) * len);
+      grad.addColorStop(0, `rgba(255, 220, 120, ${0.07 + breathe})`);
+      grad.addColorStop(0.5, `rgba(255, 210, 100, ${0.03 + breathe})`);
+      grad.addColorStop(1, 'transparent');
+      sunCtx.fillStyle = grad;
+      sunCtx.fill();
+    });
+  }
+  requestAnimationFrame(drawSun);
+}
+
+function startSun() { sunCanvas.style.display = 'block'; sunActive = true; }
+function stopSun()  { sunCanvas.style.display = 'none';  sunActive = false; }
+
+setTimeout(() => { resizeSun(); requestAnimationFrame(drawSun); }, 100);
+window.addEventListener('resize', resizeSun);
