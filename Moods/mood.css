@@ -52,4 +52,5 @@
   pointer-events: none;
   z-index: 2;
   display: none;
+  mix-blend-mode: screen;
 }

@@ -228,62 +228,162 @@ function stopMist()  { mistCanvas.style.display = 'none';  mistActive = false; }
 setTimeout(() => { resizeMist(); requestAnimationFrame(drawMist); }, 100);
 window.addEventListener('resize', resizeMist);
 
-// SUN RAYS
+
+// Sun ray shader adapted from ReactBits SideRays component
+// Original: https://reactbits.dev/backgrounds/side-rays
+
+// SUN RAYS, WebGL shader port
 const sunCanvas = document.getElementById('desktop-sun');
-const sunCtx = sunCanvas.getContext('2d');
 let sunActive = false;
+let sunAnimId = null;
+
+function initSunRays() {
+  const gl = sunCanvas.getContext('webgl');
+  if (!gl) return null;
+
+  const vert = `
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+  `;
+
+  const frag = `
+    precision highp float;
+    uniform float iTime;
+    uniform vec2 iResolution;
+    uniform float iSpeed;
+    uniform vec3 iRayColor1;
+    uniform vec3 iRayColor2;
+    uniform float iIntensity;
+    uniform float iSpread;
+    uniform float iSaturation;
+    uniform float iBlend;
+    uniform float iFalloff;
+    uniform float iOpacity;
+
+    float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {
+      vec2 sourceToCoord = coord - raySource;
+      float cosAngle = dot(normalize(sourceToCoord), rayRefDirection);
+      return clamp(
+        (0.45 + 0.15 * sin(cosAngle * seedA + iTime * speed)) +
+        (0.3 + 0.2 * cos(-cosAngle * seedB + iTime * speed)),
+        0.0, 1.0) *
+        clamp((iResolution.x - length(sourceToCoord)) / iResolution.x, 0.5, 1.0);
+    }
+
+    void main() {
+      vec2 fragCoord = gl_FragCoord.xy;
+      vec2 coord = vec2(fragCoord.x, iResolution.y - fragCoord.y);
+      vec2 rayPos = vec2(iResolution.x * 1.1, -0.5 * iResolution.y);
+
+      float halfSpread = iSpread * 0.275;
+      vec2 rayRefDir1 = normalize(vec2(cos(0.785398 + halfSpread), sin(0.785398 + halfSpread)));
+      vec2 rayRefDir2 = normalize(vec2(cos(0.785398 - halfSpread), sin(0.785398 - halfSpread)));
+
+      vec4 rays1 = vec4(iRayColor1, 1.0) * rayStrength(rayPos, rayRefDir1, coord, 36.2214, 21.11349, iSpeed);
+      vec4 rays2 = vec4(iRayColor2, 1.0) * rayStrength(rayPos, rayRefDir2, coord, 22.3991, 18.0234, iSpeed * 0.2);
+
+      vec4 color = rays1 * (1.0 - iBlend) * 0.9 + rays2 * iBlend * 0.9;
+
+      float distanceToLight = length(fragCoord.xy - vec2(rayPos.x, iResolution.y - rayPos.y)) / iResolution.y;
+      float brightness = iIntensity * 0.4 / pow(max(distanceToLight, 0.001), iFalloff);
+      color.rgb *= brightness;
+
+      float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+      color.rgb = mix(vec3(gray), color.rgb, iSaturation);
+
+      color.a = max(color.r, max(color.g, color.b)) * iOpacity;
+      gl_FragColor = color;
+    }
+  `;
+
+  function compileShader(type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    return shader;
+  }
+
+  const program = gl.createProgram();
+  gl.attachShader(program, compileShader(gl.VERTEX_SHADER, vert));
+  gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, frag));
+  gl.linkProgram(program);
+  gl.useProgram(program);
+
+  const positions = new Float32Array([-1, -1, 3, -1, -1, 3]);
+  const buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+  const posLoc = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  // uniforms
+  const uniforms = {
+    iTime:       gl.getUniformLocation(program, 'iTime'),
+    iResolution: gl.getUniformLocation(program, 'iResolution'),
+    iSpeed:      gl.getUniformLocation(program, 'iSpeed'),
+    iRayColor1:  gl.getUniformLocation(program, 'iRayColor1'),
+    iRayColor2:  gl.getUniformLocation(program, 'iRayColor2'),
+    iIntensity:  gl.getUniformLocation(program, 'iIntensity'),
+    iSpread:     gl.getUniformLocation(program, 'iSpread'),
+    iSaturation: gl.getUniformLocation(program, 'iSaturation'),
+    iBlend:      gl.getUniformLocation(program, 'iBlend'),
+    iFalloff:    gl.getUniformLocation(program, 'iFalloff'),
+    iOpacity:    gl.getUniformLocation(program, 'iOpacity'),
+  };
+
+  gl.uniform1f(uniforms.iSpeed,      1.5);
+  gl.uniform3fv(uniforms.iRayColor1, [1.0, 0.85, 0.4]);   // yellow
+  gl.uniform3fv(uniforms.iRayColor2, [1.0, 0.95, 0.7]);   // white-gold
+  gl.uniform1f(uniforms.iIntensity,  1.8);
+  gl.uniform1f(uniforms.iSpread,     2.0);
+  gl.uniform1f(uniforms.iSaturation, 1.2);
+  gl.uniform1f(uniforms.iBlend,      0.6);
+  gl.uniform1f(uniforms.iFalloff,    1.4);
+  gl.uniform1f(uniforms.iOpacity,    0.85);
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  return { gl, uniforms };
+}
+
+let sunGL = null;
 
 function resizeSun() {
-  sunCanvas.width = window.innerWidth;
+  sunCanvas.width  = window.innerWidth;
   sunCanvas.height = window.innerHeight;
+  if (sunGL) {
+    sunGL.gl.viewport(0, 0, sunCanvas.width, sunCanvas.height);
+    sunGL.gl.uniform2fv(sunGL.uniforms.iResolution, [sunCanvas.width, sunCanvas.height]);
+  }
 }
-
-const sunRays = Array.from({length: 12}, (_, i) => ({
-  angle: (i / 12) * Math.PI * 0.75 + Math.PI * 0.6,
-  width: 0.04 + Math.random() * 0.07,
-  offset: Math.random() * 1000,
-  speed: 0.0002 + Math.random() * 0.0003
-}));
 
 function drawSun(ts) {
-  sunCtx.clearRect(0, 0, sunCanvas.width, sunCanvas.height);
-  if (sunActive) {
-    const cx = sunCanvas.width * 0.88;
-    const cy = -30;
-
-    // ambient glow
-    const glow = sunCtx.createRadialGradient(cx, cy, 0, cx, cy, sunCanvas.width * 0.8);
-    glow.addColorStop(0, 'rgba(255, 210, 100, 0.1)');
-    glow.addColorStop(1, 'transparent');
-    sunCtx.fillStyle = glow;
-    sunCtx.fillRect(0, 0, sunCanvas.width, sunCanvas.height);
-
-    // rays
-    sunRays.forEach(r => {
-      const breathe = Math.sin(ts * r.speed + r.offset) * 0.015;
-      const len = sunCanvas.width * 1.8;
-      const a1 = r.angle - r.width / 2;
-      const a2 = r.angle + r.width / 2;
-
-      sunCtx.beginPath();
-      sunCtx.moveTo(cx, cy);
-      sunCtx.lineTo(cx + Math.cos(a1) * len, cy + Math.sin(a1) * len);
-      sunCtx.lineTo(cx + Math.cos(a2) * len, cy + Math.sin(a2) * len);
-      sunCtx.closePath();
-
-      const grad = sunCtx.createLinearGradient(cx, cy, cx + Math.cos(r.angle) * len, cy + Math.sin(r.angle) * len);
-      grad.addColorStop(0, `rgba(255, 220, 120, ${0.07 + breathe})`);
-      grad.addColorStop(0.5, `rgba(255, 210, 100, ${0.03 + breathe})`);
-      grad.addColorStop(1, 'transparent');
-      sunCtx.fillStyle = grad;
-      sunCtx.fill();
-    });
+  if (!sunActive || !sunGL) {
+    sunAnimId = requestAnimationFrame(drawSun);
+    return;
   }
-  requestAnimationFrame(drawSun);
+  sunGL.gl.uniform1f(sunGL.uniforms.iTime, ts * 0.001);
+  sunGL.gl.drawArrays(sunGL.gl.TRIANGLES, 0, 3);
+  sunAnimId = requestAnimationFrame(drawSun);
 }
 
-function startSun() { sunCanvas.style.display = 'block'; sunActive = true; }
-function stopSun()  { sunCanvas.style.display = 'none';  sunActive = false; }
+function startSun() {
+  sunCanvas.style.display = 'block';
+  sunActive = true;
+  if (!sunGL) {
+    sunGL = initSunRays();
+    resizeSun();
+  }
+}
+
+function stopSun() {
+  sunCanvas.style.display = 'none';
+  sunActive = false;
+}
 
 setTimeout(() => { resizeSun(); requestAnimationFrame(drawSun); }, 100);
 window.addEventListener('resize', resizeSun);

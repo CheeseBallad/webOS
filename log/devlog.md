@@ -97,3 +97,8 @@ the log of a novice learning things as they build
  ## July 27
  - improved heavy rain mood, now w/ lightning
  - improved mist mood now with moving mist
+ - started sun ray creation
+ ## July 28
+ - finalized mist mood
+ - initialized sun ray mood
+ - AMAZING SUN RAY MOOD
