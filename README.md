@@ -70,6 +70,7 @@ git clone https://github.com/CheeseBallad/webOS.git
 (Inspired and initially guided with https://jams.hackclub.com/batch/webOS !!)
 - rain animation inspired by/adapted from the official TUYU website
 - Weather background images derived from official TUYU MVs
+- Sun ray effect adapted from [ReactBits SideRays](https://reactbits.dev/backgrounds/side-rays) (MIT License)
 
 ## AI usage
 - AI tools suchs as Claude and Chatgpt were occasionally used for:

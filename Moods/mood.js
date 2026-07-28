@@ -17,8 +17,8 @@ const moodSettings = {
   },
   "Overcast Skies": {
     overlay: "rgba(100, 120, 160, 0.3)",
-    overlayOpacity: 0.4,
-    wallpaperBrightness: 0.7,
+    overlayOpacity: 0.55,
+    wallpaperBrightness: 0.65,
     rainEnabled: false,
   },
   "Hide and Seek Alone": {
@@ -68,14 +68,16 @@ function setWeatherMood(desc) {
     apparition.style.opacity = 0.06;
   }, 1000);
 
-  // always stop flash first
+  // always stop flash first gng
   stopFlash();
   stopMist();
   stopSun();
+  stopCloud();
 
   if (desc === "Heavy Rain Fall") scheduleFlash();
   if (desc === "Hide and Seek Alone") startMist();
   if (desc === "Summer Breeze") startSun();
+  if (desc === "Overcast Skies") startCloud();
 
   rainEnabled = mood.rainEnabled;
   if (mood.rainEnabled) {
@@ -387,3 +389,76 @@ function stopSun() {
 
 setTimeout(() => { resizeSun(); requestAnimationFrame(drawSun); }, 100);
 window.addEventListener('resize', resizeSun);
+
+// CLOUDS mood
+const cloudCanvas = document.getElementById('desktop-cloud');
+const cloudCtx = cloudCanvas.getContext('2d');
+let cloudActive = false;
+
+function resizeCloud() {
+  cloudCanvas.width = window.innerWidth;
+  cloudCanvas.height = window.innerHeight;
+}
+
+// Clouds
+const cloudWisps = Array.from({ length: 6 }, (_, i) => ({
+  xRatio: Math.random(),
+  yRatio: (i / 6) * 0.7,
+  radius: 220 + Math.random() * 200,
+  speed: 0.00003 + Math.random() * 0.00004,
+  offset: Math.random() * 1000,
+  opacity: 0.08 + Math.random() * 0.1
+}));
+
+// Animation of dust/ dew
+const dewDroplets = Array.from({ length: 100 }, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  radius: 0.8 + Math.random() * 1.8,
+  speed: 0.00002 + Math.random() * 0.00003,
+  offset: Math.random() * 1000,
+  opacity: 0.1 + Math.random() * 0.2
+}));
+
+function drawCloud(ts) {
+  cloudCtx.clearRect(0, 0, cloudCanvas.width, cloudCanvas.height);
+
+  if (cloudActive) {
+    // clouds
+    cloudWisps.forEach(w => {
+      const totalWidth = cloudCanvas.width + w.radius * 2;
+      const x = ((w.xRatio * cloudCanvas.width + ts * w.speed * cloudCanvas.width) % totalWidth) - w.radius;
+      const y = w.yRatio * cloudCanvas.height + Math.sin(ts * 0.0003 + w.offset) * 25;
+      const radiusPulse = w.radius + Math.sin(ts * 0.0002 + w.offset) * 15;
+
+      const grad = cloudCtx.createRadialGradient(x, y, 10, x, y, radiusPulse);
+      grad.addColorStop(0, `rgba(180, 195, 215, ${w.opacity})`);
+      grad.addColorStop(0.6, `rgba(150, 165, 185, ${w.opacity * 0.5})`);
+      grad.addColorStop(1, 'transparent');
+
+      cloudCtx.fillStyle = grad;
+      cloudCtx.beginPath();
+      cloudCtx.arc(x, y, radiusPulse, 0, Math.PI * 2);
+      cloudCtx.fill();
+    });
+
+    // dust particles
+    dewDroplets.forEach(d => {
+      const x = ((d.x + ts * d.speed) % 1) * cloudCanvas.width;
+      const y = d.y * cloudCanvas.height + Math.sin(ts * 0.0004 + d.offset) * 12;
+
+      cloudCtx.fillStyle = `rgba(255, 255, 255, ${d.opacity})`;
+      cloudCtx.beginPath();
+      cloudCtx.arc(x, y, d.radius, 0, Math.PI * 2);
+      cloudCtx.fill();
+    });
+  }
+
+  requestAnimationFrame(drawCloud);
+}
+
+function startCloud() { cloudCanvas.style.display = 'block'; cloudActive = true; }
+function stopCloud()  { cloudCanvas.style.display = 'none';  cloudActive = false; }
+
+setTimeout(() => { resizeCloud(); requestAnimationFrame(drawCloud); }, 100);
+window.addEventListener('resize', resizeCloud);
