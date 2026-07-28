@@ -25,6 +25,8 @@ https://tuyu-os.vercel.app/
 ### Apps
 - TUYU (Biography app, scrollable)
 - Weather
+  - Live forecasts
+  - Dynamic TUYU-inspired weather moods
 
 For more information on the applications:
 [APPS INSTRUCTIONS](log/APPS.md)
@@ -59,7 +61,7 @@ git clone https://github.com/CheeseBallad/webOS.git
 3. Launch `index.html` using Live Server or open it directly in your browser
 
 ## Future Plans
-- Weather moods (very spicy I promise)
+- polish morning glory falls
 - Lockscreen
 - Music player (TUYU songs)
 - smoother animations and elements

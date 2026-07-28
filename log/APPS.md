@@ -21,3 +21,14 @@ Dedicated to give an immersive experience when it comes to the rainy aesthetic o
   - Wind speed
   - Weather condition
 The dynamic background changes based on the live weather, serving as a reference to TUYU song titles and MVs
+
+For testing, weather moods can be previewed using the developer console via
+  testMood("")
+
+Valid moods:
+  - "Summer Breeze"
+  - "Overcast Skies"
+  - "Hide and Seek Alone"
+  - "It's Raining After All"
+  - "Heavy Rain Fall"
+  - "When Morning Glory Falls"

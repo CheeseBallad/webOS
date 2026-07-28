@@ -102,3 +102,7 @@ the log of a novice learning things as they build
  - finalized mist mood
  - initialized sun ray mood
  - AMAZING SUN RAY MOOD
+ - AMAZING CLOUDY MOOD
+ - updated readme
+ - fixed a few bugs
+ - reshipping, 36 hrs, 2 minutes logged at the moment of writting
